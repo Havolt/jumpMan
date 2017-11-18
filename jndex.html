@@ -10,6 +10,7 @@
       width: 640px;
       height: 640px;
       margin: 0 auto;
+      position: relative;
     }
 
     .genTile{
@@ -17,6 +18,13 @@
       width: 80px;
       height: 80px;
       float: left;
+    }
+
+    .jumpManStyle{
+      background-color: orange;
+      height: 10px;
+      width: 5px;
+      position: absolute;
     }
 
     </style>
@@ -28,6 +36,8 @@
     <script>
 
     const app = document.getElementById('app');
+    const grav = 3;
+    let jumpMan = new Object;
 
     let backTile = new Array;
 
@@ -57,10 +67,39 @@
       }
     }
 
+    function charMaker(){
+      jumpMan.color = 'orange';
+      jumpMan.x = 640/2;
+      jumpMan.y = 640/2;
+      jumpMan.height = 10;
+      jumpMan.width = 5;
+    }
+
+    function charBuilder(){
+      const jm = document.createElement('div');
+      jm.classList = 'jumpManStyle';
+      jm.style.left = jumpMan.x+'px';
+      jm.style.top = jumpMan.y+'px';
+      jm.id = 'jumpManDiv';
+      app.appendChild(jm);
+    }
+
+    function charRefresh(){
+      let jm = document.getElementById('jumpManDiv');
+      jumpMan.y += grav;
+      jm.style.left = jumpMan.x+'px';
+      jm.style.top = jumpMan.y+'px';
+      console.log('lol');
+    }
+
     (function init(){
       tileMaker();
       mapBuilder();
+      charMaker();
+      charBuilder();
     })()
+
+    setInterval(charRefresh, 1000/6);
 
     console.log(backTile);
 
