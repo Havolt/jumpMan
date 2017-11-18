@@ -5,10 +5,18 @@
     <title>JumpMan</title>
     <style>
 
-    #div{
+    #app{
       background-color: lightblue;
       width: 640px;
       height: 640px;
+      margin: 0 auto;
+    }
+
+    .genTile{
+      background-color: lightblue;
+      width: 80px;
+      height: 80px;
+      float: left;
     }
 
     </style>
@@ -23,18 +31,36 @@
 
     let backTile = new Array;
 
-    for(var i = 0; i < 64 / 8; i++){
-      for(var j = 0; j < 64 / 8; j++){
-        const bT = new Object;
-        if(i > 6){bT.color = 'green';
-      }else{bT.color = 'lightblue'}
-        backTile.push(bT);
-      bT.topX = i * 80;
-      bT.bottomX = (i+1) * 80;
-      bT.leftY = j * 80;
-      bT.rightY = (j+1)*80;
+    function tileMaker(){
+      for(var i = 0; i < 64 / 8; i++){
+        for(var j = 0; j < 64 / 8; j++){
+          const bT = new Object;
+          if(i > 5){bT.color = 'green';
+        }else{bT.color = 'lightblue'}
+          backTile.push(bT);
+        bT.topX = i * 80;
+        bT.bottomX = (i+1) * 80;
+        bT.leftY = j * 80;
+        bT.rightY = (j+1)*80;
+        }
       }
     }
+
+    function mapBuilder(){
+      for(var i = 0; i < backTile.length; i++){
+        const divMan = document.createElement('div');
+        if(backTile[i].color == 'green'){
+          divMan.style.backgroundColor = 'green';
+        }
+        divMan.classList = 'genTile'
+        app.appendChild(divMan);
+      }
+    }
+
+    (function init(){
+      tileMaker();
+      mapBuilder();
+    })()
 
     console.log(backTile);
 
