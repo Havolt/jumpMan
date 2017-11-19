@@ -38,7 +38,10 @@
     const app = document.getElementById('app');
     const grav = 5;
     const speed = 4;
+    let jmFall = true;
     let jumpMan = new Object;
+    let runner = 0;
+    let allowJump = true;
 
     let backTile = new Array;
 
@@ -93,7 +96,7 @@
     }
 
     function charPhysics(){
-      let jmFall = true;
+      jmFall = true;
       for(var i = 0; i < backTile.length; i++){
         //console.log(jumpMan.y + ' | ' + backTile[i].topX  )
         if(jumpMan.y == (backTile[i].topY - 30) && backTile[i].color == 'green'){
@@ -112,6 +115,16 @@
       }
       else if(event.key == 'ArrowLeft'){
         jumpMan.x -= speed;
+      }
+      else if(event.key == ' '){
+        jumpMan.y -= 30;
+        runner++;
+        console.log('zoom')
+        if(runner > 7){
+          runner = 0;
+          jmFall = true;
+          allowJump = false;
+        }
       }
     }
 
