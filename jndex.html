@@ -22,8 +22,8 @@
 
     .jumpManStyle{
       background-color: orange;
-      height: 10px;
-      width: 5px;
+      height: 30px;
+      width: 15px;
       position: absolute;
     }
 
@@ -36,7 +36,8 @@
     <script>
 
     const app = document.getElementById('app');
-    const grav = 3;
+    const grav = 5;
+    const speed = 4;
     let jumpMan = new Object;
 
     let backTile = new Array;
@@ -48,10 +49,10 @@
           if(i > 5){bT.color = 'green';
         }else{bT.color = 'lightblue'}
           backTile.push(bT);
-        bT.topX = i * 80;
-        bT.bottomX = (i+1) * 80;
-        bT.leftY = j * 80;
-        bT.rightY = (j+1)*80;
+        bT.topY = i * 80;
+        bT.bottomY = (i+1) * 80;
+        bT.leftX = j * 80;
+        bT.rightX = (j+1)*80;
         }
       }
     }
@@ -85,11 +86,33 @@
     }
 
     function charRefresh(){
+      charPhysics();
       let jm = document.getElementById('jumpManDiv');
-      jumpMan.y += grav;
       jm.style.left = jumpMan.x+'px';
       jm.style.top = jumpMan.y+'px';
-      console.log('lol');
+    }
+
+    function charPhysics(){
+      let jmFall = true;
+      for(var i = 0; i < backTile.length; i++){
+        //console.log(jumpMan.y + ' | ' + backTile[i].topX  )
+        if(jumpMan.y == (backTile[i].topY - 30) && backTile[i].color == 'green'){
+          jmFall = false;
+        }
+      }
+      if(jmFall == true){
+        jumpMan.y += grav;
+      }
+    }
+
+    function charControl(event){
+      console.log(event)
+      if(event.key == "ArrowRight"){
+        jumpMan.x += speed;
+      }
+      else if(event.key == 'ArrowLeft'){
+        jumpMan.x -= speed;
+      }
     }
 
     (function init(){
@@ -99,7 +122,9 @@
       charBuilder();
     })()
 
-    setInterval(charRefresh, 1000/6);
+    setInterval(charRefresh, 1000/30);
+
+    document.addEventListener('keydown', charControl)
 
     console.log(backTile);
 
