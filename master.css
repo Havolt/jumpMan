@@ -1,0 +1,10 @@
+#app{
+    width: 512px;
+}
+
+.skyTile{
+    width: 32px;
+    height: 32px;
+    float: left;
+    background: rgb(90, 168, 192);
+}
