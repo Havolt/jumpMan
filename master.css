@@ -2,6 +2,14 @@
     width: 512px;
 }
 
+#charSprite{
+    width: 20px;
+    height: 40px;
+    background: rgb(102, 39, 39);
+    z-index: 20;
+    position: absolute;
+}
+
 .skyTile{
     width: 32px;
     height: 32px;

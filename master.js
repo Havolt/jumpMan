@@ -32,10 +32,10 @@ console.log('foo');
 function charLogic(c){
     c.lives = 3;
     c.xLeft = 40;
-    c.width = 30;
-    c.height = 60;
+    c.width = 20;
+    c.height = 40;
     c.xRight = c.xLeft + c.width;
-    c.yTop = 400;
+    c.yTop = 382;
     c.yBottom = c.yTop + c.height;
     c.speed = 0;
     c.allowMove = true;
@@ -77,6 +77,13 @@ function makeLevelDis(){
 
 function makeCharDis(c){
     console.log(c);
+    const charSpr = document.createElement('div');
+    charSpr.id = 'charSprite';
+    charSpr.style.left = char.xLeft + 'px';
+    charSpr.style.top = char.yTop + 'px';
+    console.log('fuck on')
+    app.appendChild(charSpr);
+
 }
 
 function evtListeners(){
