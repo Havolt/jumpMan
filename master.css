@@ -8,3 +8,10 @@
     float: left;
     background: rgb(90, 168, 192);
 }
+
+.grassTile{
+    width: 32px;
+    height: 32px;
+    float: left;
+    background: rgb(54, 155, 62);
+}
