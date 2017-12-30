@@ -42,6 +42,8 @@ function charLogic(c){
     c.momentum = 0;
 }
 
+
+
 function makeLevel(lev){
     currLevLog = [];
     for(let i = 0; i < lev.length; i++){
@@ -76,22 +78,36 @@ function makeLevelDis(){
 }
 
 function makeCharDis(c){
+    if(document.getElementById('charSprite')){
+        app.removeChild(document.getElementById('charSprite'));
+    }
     console.log(c);
     const charSpr = document.createElement('div');
     charSpr.id = 'charSprite';
     charSpr.style.left = char.xLeft + 'px';
     charSpr.style.top = char.yTop + 'px';
-    console.log('fuck on')
     app.appendChild(charSpr);
 
+}
+
+function gameEngine(){
+    char.xLeft += char.speed;
+    makeCharDis(charLogic);
+
+    setTimeout(function(){gameEngine()}, 300);
 }
 
 function evtListeners(){
     document.addEventListener('keydown', function(e){
         console.log(e.keyCode);
-        if(e.keyCode == 37 || e.keyCode == 39){
-            if(char.momentum < 10){
-                char.momentum += 1;
+        if(e.keyCode == 37){
+            if(char.speed > -10 ){
+                char.speed--;
+            }
+        }
+        else if(e.keyCode == 39){
+            if(char.speed < 10){
+                char.speed++;
             }
         }
     })
@@ -102,6 +118,8 @@ function evtListeners(){
     makeLevelDis();
     charLogic(char);
     makeCharDis(char);
+
+    gameEngine();
 
     evtListeners();
     console.log(currLevLog);
